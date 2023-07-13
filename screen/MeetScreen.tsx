@@ -1,10 +1,10 @@
-import {StyleSheet, View, SafeAreaView} from 'react-native';
+import {StyleSheet, Text, SafeAreaView} from 'react-native';
 import React from 'react';
 
 const MeetScreen = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <View />
+      <Text>こんにちは！</Text>
     </SafeAreaView>
   );
 };
