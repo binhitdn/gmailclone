@@ -6,26 +6,22 @@ import TabBarIcon from './TabBarIcon';
 
 const Tab = createBottomTabNavigator();
 
-function MyTabs(): JSX.Element {
+const MyTabs = (): JSX.Element => {
   const renderTabBarIcon = ({
-    focused,
     color,
     size,
+    name,
   }: {
-    focused: boolean;
     color: string;
     size: number;
-  }) => (
-    <TabBarIcon
-      routeName={focused ? 'Home' : 'Meet'}
-      color={color}
-      size={size}
-    />
-  );
+    name: string;
+  }) => <TabBarIcon routeName={name} color={color} size={size} />;
 
   return (
     <Tab.Navigator
-      screenOptions={{
+      screenOptions={({route}) => ({
+        tabBarIcon: ({color, size}) =>
+          renderTabBarIcon({color, size, name: route.name}),
         tabBarActiveTintColor: 'red',
         tabBarInactiveTintColor: 'black',
         tabBarStyle: {
@@ -41,10 +37,9 @@ function MyTabs(): JSX.Element {
           borderTopWidth: 1,
         },
         tabBarLabelStyle: {
-          fontSize: 15,
+          fontSize: 14,
         },
-        tabBarIcon: renderTabBarIcon,
-      }}>
+      })}>
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -63,6 +58,6 @@ function MyTabs(): JSX.Element {
       />
     </Tab.Navigator>
   );
-}
+};
 
 export default MyTabs;
